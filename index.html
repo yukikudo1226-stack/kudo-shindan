@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="はい・いいえで20問。美容室オーナー向けに、幹部が育つ店かを5分で診断します。">
+<meta property="og:title" content="幹部が育つ店か 5分診断">
+<meta property="og:description" content="はい・いいえで20問。あなたの店の「抜けているところ」が分かります。">
+<title>幹部が育つ店か 5分診断</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --ground:#FFFFFF; --ink:#111111; --sub:#6E6E6C; --mid:#B9B9B6; --line:#E6E6E3; --soft:#F4F4F2;
+  --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --gothic:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --latin:"Cormorant Garamond","Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--gothic);font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased;padding-inline:16px;padding-block:0 56px}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+button{font:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* 共通パーツ */
+.eyebrow{font-family:var(--latin);font-style:italic;font-size:15px;letter-spacing:.14em;color:var(--sub);display:flex;align-items:center;gap:12px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+.jp-label{font-size:11px;letter-spacing:.24em;color:var(--sub)}
+.proto{font-size:11px;color:var(--sub);text-align:center;padding-block:10px;border-bottom:1px dashed var(--mid);margin-inline:-16px;padding-inline:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:17px 22px;font-weight:700;font-size:16px;letter-spacing:.1em;transition:background .2s,color .2s}
+.btn .arw{font-family:var(--latin);font-size:20px;line-height:1;transition:transform .2s}
+.btn:hover .arw{transform:translateX(4px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+
+/* 表紙 */
+.hero{position:relative;overflow:hidden;margin-inline:-16px;padding:44px 16px 8px}
+.halo{position:absolute;right:-120px;top:-110px;width:380px;height:380px;pointer-events:none;color:var(--mid)}
+.hero-in{position:relative;display:flex;flex-direction:column;gap:22px;max-width:560px;margin:0 auto}
+.hero h1{font-family:var(--mincho);font-weight:800;font-size:clamp(32px,9vw,44px);line-height:1.38;letter-spacing:.02em;margin:0;text-wrap:balance}
+.hero h1 .dot{text-emphasis:filled dot var(--ink);-webkit-text-emphasis:filled dot var(--ink);text-emphasis-position:over right}
+.lead{margin:0;color:var(--sub);font-size:15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--ink)}
+.stat{padding:14px 4px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat b{font-family:var(--latin);font-weight:500;font-size:34px;line-height:1;font-variant-numeric:lining-nums}
+.stat span{font-size:11px;letter-spacing:.14em;color:var(--sub)}
+.learn{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.learn li{display:grid;grid-template-columns:2.6em 1fr;gap:6px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+.learn li i{font-family:var(--latin);font-style:italic;font-size:18px;color:var(--sub);line-height:1.5}
+.sign{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--sub);letter-spacing:.08em}
+.sign::before{content:"";width:28px;height:1px;background:var(--ink)}
+
+/* 設問 */
+.quiz{display:flex;flex-direction:column;gap:26px;padding-top:32px}
+.qhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.qno{font-family:var(--latin);font-weight:500;font-size:64px;line-height:.9;letter-spacing:-.01em}
+.qno small{font-size:20px;color:var(--sub);margin-left:4px}
+.qaxis{font-size:11px;letter-spacing:.2em;border:1px solid var(--ink);border-radius:999px;padding:3px 12px;white-space:nowrap}
+.ticks{display:grid;gap:3px}
+.ticks i{height:2px;background:var(--line);transition:background .2s}
+.ticks i.on{background:var(--ink)}
+.q{font-family:var(--mincho);font-weight:600;font-size:22px;line-height:1.65;margin:0;text-wrap:pretty;min-height:4.95em}
+.opts{display:grid;gap:10px}
+.opts.two{grid-template-columns:1fr 1fr;gap:12px}
+.opt{display:flex;align-items:center;gap:12px;border:1px solid var(--mid);background:var(--ground);border-radius:6px;padding:16px;font-weight:500;font-size:16px;text-align:left;transition:border-color .15s,background .15s,color .15s}
+.opts.two .opt{flex-direction:column;justify-content:center;gap:6px;padding:22px 12px;text-align:center}
+.opt .mk{font-family:var(--latin);font-size:30px;line-height:1}
+.opt:hover{border-color:var(--ink)}
+.opt[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.back{background:none;border:0;padding:4px 0;color:var(--sub);font-size:13px;letter-spacing:.08em;align-self:flex-start}
+
+/* 結果 */
+.result{display:flex;flex-direction:column;gap:36px;padding-top:36px}
+.sec{display:flex;flex-direction:column;gap:16px}
+.typecard{position:relative;border:1px solid var(--ink);padding:28px 20px 24px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.typecard .halo{right:-150px;top:-150px;width:320px;height:320px}
+.typecard .jp-label,.typecard .tname,.typecard p,.typecard .score{position:relative}
+.tname{font-family:var(--mincho);font-weight:800;font-size:clamp(30px,8.5vw,38px);line-height:1.3;margin:0}
+.score{font-family:var(--latin);font-size:18px;color:var(--sub)}
+.score b{font-size:30px;color:var(--ink);font-weight:500}
+.typecard p{margin:0;font-size:15px}
+.radar{width:100%;max-width:340px;margin:0 auto;display:block;color:var(--ink)}
+.axlist{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--ink)}
+.axlist div{text-align:center;padding:10px 2px;font-size:12px;display:flex;flex-direction:column;gap:2px}
+.axlist div+div{border-left:1px solid var(--line)}
+.axlist b{font-family:var(--latin);font-size:22px;font-weight:500;line-height:1.1}
+.axlist .weak{background:var(--ink);color:#fff}
+.note{font-size:12px;color:var(--sub);margin:0}
+.tomorrow{font-family:var(--mincho);font-weight:600;font-size:20px;line-height:1.7;margin:0;padding:18px 0;border-block:1px solid var(--ink);position:relative;padding-left:40px}
+.tomorrow::before{content:"“";font-family:var(--latin);font-size:56px;line-height:1;position:absolute;left:0;top:10px;color:var(--mid)}
+.aibox{background:var(--soft);border-radius:6px;padding:22px 18px;display:flex;flex-direction:column;gap:14px}
+.aibox h3{font-family:var(--mincho);font-weight:800;font-size:22px;margin:0;line-height:1.4}
+.aibox p{margin:0;font-size:14px;color:var(--sub)}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:12px;text-align:center}
+.how div{background:var(--ground);border-radius:4px;padding:10px 4px;display:flex;flex-direction:column;gap:2px}
+.how i{font-family:var(--latin);font-style:italic;font-size:18px;color:var(--sub);line-height:1.2}
+pre.prompt{white-space:pre-wrap;font-family:var(--gothic);font-size:12px;line-height:1.7;background:var(--ground);border:1px solid var(--line);border-radius:4px;padding:12px;max-height:150px;overflow:auto;margin:0;color:var(--sub)}
+.copied{font-size:13px;font-weight:700;min-height:1.4em;margin:0;text-align:center}
+.cta{border-top:1px solid var(--ink);padding-top:22px;display:flex;flex-direction:column;gap:14px}
+.cta h3{font-family:var(--mincho);font-weight:800;font-size:22px;line-height:1.5;margin:0}
+.cta p{margin:0;font-size:14px;color:var(--sub)}
+.kw{display:inline-block;border:1px solid var(--ink);padding:0 10px;margin-inline:2px;font-weight:700;color:var(--ink)}
+.url{font-size:12px;color:var(--sub);word-break:break-all;text-align:center}
+.sample{border-bottom:1px dashed var(--ink)}
+.retry{background:none;border:0;color:var(--sub);font-size:13px;letter-spacing:.08em;text-decoration:underline;text-underline-offset:4px;align-self:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="halo" viewBox="0 0 380 380"><g fill="none" stroke="currentColor" stroke-width="1">
+    <circle cx="190" cy="190" r="186"/><circle cx="190" cy="190" r="150" opacity=".8"/><circle cx="190" cy="190" r="114" opacity=".6"/><circle cx="190" cy="190" r="78" opacity=".45"/><circle cx="190" cy="190" r="42" opacity=".3"/></g></symbol>
+</svg>
+
+
+<!-- 表紙 -->
+<section id="intro">
+  <div class="hero">
+    <svg class="halo" aria-hidden="true"><use href="#halo"/></svg>
+    <div class="hero-in">
+      <span class="eyebrow">Kudo Method — Diagnosis</span>
+      <h1>あなたの店は<br><span class="dot">幹部</span>が育つ店<br>ですか。</h1>
+      <p class="lead">はい・いいえで答えるだけ。離職率を30%から10%にした現場の見方で、あなたの店の「抜けているところ」を1つ見つけます。</p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:28px">
+    <div class="stats">
+      <div class="stat"><b>20</b><span>QUESTIONS</span></div>
+      <div class="stat"><b>5</b><span>MINUTES</span></div>
+      <div class="stat"><b>5</b><span>CHECK POINTS</span></div>
+    </div>
+    <div>
+      <span class="jp-label">わかること</span>
+      <ul class="learn">
+        <li><i>i.</i><span>あなたの店のタイプ(4つのどれか)</span></li>
+        <li><i>ii.</i><span>権限・基準・確認の場・面談・育成のうち、どこが抜けているか</span></li>
+        <li><i>iii.</i><span>明日やること1つと、結果入りの「工藤式幹部育成AI」</span></li>
+      </ul>
+    </div>
+    <button class="btn" id="start">診断をはじめる <span class="arw">→</span></button>
+    <p class="note" style="text-align:center">名前や連絡先は聞きません。回答は、個人が特定されない形で集計に使います</p>
+    <span class="sign">美容室の設計マネージャー 工藤ユウキ</span>
+  </div>
+</section>
+
+<!-- 設問 -->
+<section id="quiz" class="wrap quiz" hidden>
+  <div class="ticks" id="ticks"></div>
+  <div class="qhead">
+    <span class="qno" id="qno"></span>
+    <span class="qaxis" id="qaxis"></span>
+  </div>
+  <p class="q" id="qText"></p>
+  <div class="opts" id="opts"></div>
+  <button class="back" id="back">← ひとつ前に戻る</button>
+</section>
+
+<!-- 結果 -->
+<section id="result" class="wrap result" hidden>
+  <div class="sec">
+    <span class="eyebrow">Your Result</span>
+    <div class="typecard">
+      <svg class="halo" aria-hidden="true"><use href="#halo"/></svg>
+      <span class="jp-label">あなたの店のタイプ</span>
+      <p class="tname" id="rType"></p>
+      <span class="score" id="rScore"></span>
+      <p id="rDesc"></p>
+    </div>
+  </div>
+
+  <div class="sec">
+    <span class="eyebrow">Five Points</span>
+    <svg class="radar" id="radar" viewBox="0 0 320 290" role="img" aria-label="5項目のバランス"></svg>
+    <div class="axlist" id="axlist"></div>
+    <p class="note">各項目4問ずつ(数字は「はい」の数)。黒く反転している項目(4問中1問以下)が、いま一番の抜けです。</p>
+  </div>
+
+  <div class="sec">
+    <span class="eyebrow">Tomorrow</span>
+    <span class="jp-label">明日やること(1つだけ)</span>
+    <p class="tomorrow" id="rTomorrow"></p>
+  </div>
+
+  <div class="aibox">
+    <span class="jp-label">プレゼント</span>
+    <h3>工藤式幹部育成AI</h3>
+    <p>あなたの診断結果が入った指示文です。いつも使っているAIに貼るだけで、工藤式の相談相手になります。</p>
+    <div class="how">
+      <div><i>1</i>コピー</div>
+      <div><i>2</i>AIを開く</div>
+      <div><i>3</i>貼って送信</div>
+    </div>
+    <button class="btn" id="copy">指示文をコピーする <span class="arw">→</span></button>
+    <p class="copied" id="copied" aria-live="polite"></p>
+    <pre class="prompt" id="prompt"></pre>
+    <p style="font-size:12px">ChatGPT・Claude・Geminiの無料版で使えます</p>
+  </div>
+
+  <div class="cta">
+    <span class="eyebrow">Consultation</span>
+    <h3>お店に合わせて、<br>工藤と一緒に考える</h3>
+    <p>個別診断(Zoom30分・毎月先着10名)で、あなたの店の設計図を一緒に見ます。公式LINEで<span class="kw">相談</span>と送ってください。</p>
+    <a class="btn ghost" href="https://lin.ee/t2WPRNl" target="_blank" rel="noopener" style="text-decoration:none">公式LINEを開く <span class="arw">→</span></a>
+    <span class="url">https://lin.ee/t2WPRNl</span>
+    <button class="retry" id="retry">最初からやり直す</button>
+  </div>
+</section>
+
+<script>
+const PRE=[
+ {q:'店舗数を教えてください',o:['1店舗','2〜3店舗','4〜9店舗','10店舗以上']},
+ {q:'スタッフ数(全店合計)を教えてください',o:['〜5人','6〜15人','16〜30人','31人以上']},
+ {q:'いま一番の悩みはどれですか',o:['店長に任せられない','スタッフが辞める','店長・幹部が育たない','評価・給与の決め方','オーナーが忙しすぎる']}
+];
+const Q=[
+ {a:'権限',q:'店長が「自分で決めてよい範囲」を、金額や場面で言葉にして渡している'},
+ {a:'基準',q:'「これでいいですか」と聞かれたとき、店の基準を一文で答えられる'},
+ {a:'確認の場',q:'毎週または隔週、決まった日に店長と話す場がある'},
+ {a:'面談',q:'「辞めたい」と言われたとき、不満ではなく事実(何が重い・何が怖い)を聞いている'},
+ {a:'育成',q:'デビュー後に何を身につけるかの順番が決まっている'},
+ {a:'権限',q:'スタッフの判断がオーナーまで戻ってこない(店長で止まっている)'},
+ {a:'基準',q:'評価や賞与の理由を、本人に同じ言葉で説明できる'},
+ {a:'確認の場',q:'会議で決めたことが、次の会議までに実行されている'},
+ {a:'面談',q:'一番手がかからないスタッフと、この1ヶ月で個別に話した'},
+ {a:'育成',q:'次の店長候補を、名前で3人挙げられる'},
+ {a:'権限',q:'店長に任せた仕事を、途中で取り上げずに最後までやらせている'},
+ {a:'基準',q:'「良い接客」「ちゃんとやる」の中身が、スタッフ全員で同じになっている'},
+ {a:'確認の場',q:'会議で、オーナー以外の人もふつうに発言している'},
+ {a:'面談',q:'この1年で、予想していなかった退職が出ていない'},
+ {a:'育成',q:'店長が「次の店長を育てること」を自分の役割だと分かっている'},
+ {a:'権限',q:'オーナーが3日休んでも、お店の判断が止まらない'},
+ {a:'基準',q:'注意するときの基準が、店長によってバラバラになっていない'},
+ {a:'確認の場',q:'任せた仕事の途中経過を、期限の前に一度見る日を決めている'},
+ {a:'面談',q:'店長が、スタッフの退職相談をオーナーに丸投げせずに受け止められる'},
+ {a:'育成',q:'教える人によって、教え方や言うことが変わらない'}
+];
+const AXES=['権限','基準','確認の場','面談','育成'];
+const TYPES=[
+ {min:0,max:7,name:'全部オーナー型',desc:'判断が全部オーナーに戻ってきている状態です。忙しさの原因は人数ではなく、線引きがないことです。悪気ゼロで、優しいオーナーほどこうなります。',tomorrow:'店長が自分で決めてよい金額の上限を1つ決めて、口で伝える'},
+ {min:8,max:13,name:'丸投げ危険型',desc:'任せてはいるのに、基準と確認の場がない状態です。こういう店では、一番まともなスタッフから静かに辞めていきます。',tomorrow:'一番手がかからないスタッフと5分話す。不満ではなく「何が重い?」と聞く'},
+ {min:14,max:18,name:'仕組み一歩手前型',desc:'店は回っています。空いているのは、次の幹部と育成の順番です。ここが決まると、オーナーがいなくても回る店に近づきます。',tomorrow:'次の店長候補3人の名前を紙に書き、それぞれ足りないものを1つずつ書く'},
+ {min:19,max:20,name:'仕組みができている型',desc:'設問では差が出ないレベルです。次の課題は、店ごとの事情を見ないと分かりません。',tomorrow:'個別診断で、次の一手を一緒に見る'}
+];
+const BASE=`あなたは「工藤式幹部育成AI」です。美容室のオーナーと店長が、スタッフに任せられる店をつくるのを手伝います。
+
+【あなたの立場】
+僕(工藤ユウキ)の考え方を使って答えるアシスタントです。美容室の現場でマネージャーをしていた人間の目線で話します。むずかしい経営用語は使いません。
+
+【土台にする4つの考え】
+1 人が辞めるのは性格ではなく設計の抜けです。役割・権限・基準・確認の場のどれかが渡っていません
+2 口ぐせは警報です。「とりあえず君がやって」は渡し先と順番の欠落、「自分で考えてみて」は基準の欠落、「店長なんだから」は約束の確認の欠落です
+3 「何か不満ある?」と聞いてはいけません。不満には打ち手がありません。「何が重い」「何が怖い」「どこで止まってる」と事実を聞きます
+4 任せるのは作業ではなく判断です。どこまで自分で決めてよいかを先に渡します
+
+【進め方】
+最初に「どんな場面で困っていますか」と1つだけ質問します。
+相手が場面を書いたら、足りない情報を最大3つまで質問します(誰が・いつ・何が起きたか)。
+そろったら、次の形で答えます。
+■ 何が起きているか(2行)
+■ 抜けているもの(役割 / 権限 / 基準 / 確認の場 のどれか)
+■ NGな言い方(実際のセリフ)
+■ OKな言い方(そのまま言える形で)
+■ 明日やる1つ(1つだけ。5分でできること)
+
+【守ること】
+・1回の返事は600字以内。箇条書きを中心にする
+・「明日やる1つ」は必ず1つだけ
+・相手を責めない。「悪気ゼロで起きます」と伝える
+・スタッフの本名を書かないよう最初に一度だけ伝える(「Aさん」でよい)
+・法律や労務の判断(解雇・残業代など)は断定せず「社労士に確認してください」と伝える
+・分からないことは推測で埋めず、質問する
+
+【工藤への相談の案内】
+・「明日やる1つ」まで答えたときは、最後に次の1行をそのまま添える(質問を返すだけのときは添えない)
+「お店に合わせて一緒に考えたい方は、工藤ユウキの公式LINEで「相談」と送ってください(個別診断・Zoom30分)」
+・次のどれかに当てはまるときは、その1行の前に理由を1文添えて、個別診断をすすめる
+ - 店長・幹部の役割分担や、複数店舗の体制そのものを作り直す話になった
+ - 評価制度・賞与・給与の仕組みづくりの話になった
+ - 同じ悩みで3回以上やりとりが続いた
+ - 相手が「どうしたらいいか分からない」「自分だけでは無理」と書いた
+・すすめ方: 押しつけない。料金や商品の話はしない。「このAIで出せるのは一般的な型までです。お店ごとの事情に合わせた設計は、工藤が直接見たほうが早いです」と伝える
+・公式LINE: https://lin.ee/t2WPRNl`;
+
+// 回答の送り先(Google Apps ScriptのウェブアプリURL)。空のあいだは送信しない
+const GAS_URL='https://script.google.com/macros/s/AKfycbyUdB4HsilvuybB--svhgfVMW3F5V_wgsFdg13Q2hqZzXGUSNuyADjOGSGWdzL6AAwg/exec';
+// 流入元: ページURLの ?src=kuchiguse のような値(LINEのキーワードごとに付ける)
+let SRC='';
+try{SRC=(new URLSearchParams(location.search).get('src')||'').slice(0,40);}catch(e){}
+let SENT=false;
+function sendResult(d){
+  if(!GAS_URL||SENT) return; SENT=true;
+  try{fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)}).catch(()=>{});}catch(e){}
+}
+
+const $=id=>document.getElementById(id);
+let step=0; const pre=[null,null,null]; const ans=new Array(Q.length).fill(null);
+const total=PRE.length+Q.length;
+$('ticks').innerHTML='<i></i>'.repeat(total);$('ticks').style.gridTemplateColumns=`repeat(${total},1fr)`;
+
+function render(){
+  [...$('ticks').children].forEach((t,i)=>t.classList.toggle('on',i<=step));
+  $('back').hidden=step===0;
+  const box=$('opts'); box.innerHTML='';
+  if(step<PRE.length){
+    const p=PRE[step];
+    $('qno').innerHTML=`B.${step+1}`; $('qaxis').textContent='お店のこと';
+    $('qText').textContent=p.q; box.className='opts';
+    p.o.forEach((t,i)=>box.appendChild(opt(`<span>${t}</span>`,pre[step]===i,()=>{pre[step]=i;next();})));
+  }else{
+    const i=step-PRE.length,q=Q[i];
+    $('qno').innerHTML=`Q.${String(i+1).padStart(2,'0')}<small>/20</small>`; $('qaxis').textContent=q.a;
+    $('qText').textContent=q.q; box.className='opts two';
+    box.appendChild(opt('<span class="mk">○</span><span>はい</span>',ans[i]===1,()=>{ans[i]=1;next();}));
+    box.appendChild(opt('<span class="mk">×</span><span>いいえ</span>',ans[i]===0,()=>{ans[i]=0;next();}));
+  }
+}
+function opt(html,on,fn){const b=document.createElement('button');b.type='button';b.className='opt';b.innerHTML=html;b.setAttribute('aria-pressed',on?'true':'false');b.onclick=fn;return b;}
+function next(){step++; if(step>=total) showResult(); else render();}
+
+function radar(sc){
+  const cx=160,cy=150,R=100,n=5,pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];};
+  const poly=r=>AXES.map((_,i)=>pt(i,r).join(',')).join(' ');
+  let g=`<g fill="none" stroke="#E6E6E3" stroke-width="1"><polygon points="${poly(R)}"/><polygon points="${poly(R*.75)}"/><polygon points="${poly(R/2)}"/><polygon points="${poly(R/4)}"/></g>`;
+  g+=AXES.map((_,i)=>{const [x,y]=pt(i,R);return `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#E6E6E3"/>`;}).join('');
+  const vals=AXES.map(a=>sc[a]);
+  const shape=vals.map((v,i)=>pt(i,Math.max(v,0.15)*R/4).join(',')).join(' ');
+  g+=`<polygon points="${shape}" fill="#111111" fill-opacity=".08" stroke="#111111" stroke-width="1.5"/>`;
+  g+=vals.map((v,i)=>{const [x,y]=pt(i,Math.max(v,0.15)*R/4);return `<circle cx="${x}" cy="${y}" r="3.5" fill="#111111"/>`;}).join('');
+  g+=AXES.map((a,i)=>{const [x,y]=pt(i,R+24);const w=vals[i]<=1;
+    return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="13" font-family="Zen Kaku Gothic New, sans-serif" fill="${w?'#111111':'#6E6E6C'}" font-weight="${w?700:400}">${a}</text>`;}).join('');
+  $('radar').innerHTML=g;
+}
+
+function showResult(){
+  $('quiz').hidden=true; $('result').hidden=false;
+  const yes=ans.reduce((s,v)=>s+(v||0),0);
+  const t=TYPES.find(x=>yes>=x.min&&yes<=x.max);
+  $('rType').textContent=t.name;
+  $('rScore').innerHTML=`<b>${yes}</b> / 20 はい`;
+  $('rDesc').textContent=t.desc; $('rTomorrow').textContent=t.tomorrow;
+  const sc={}; AXES.forEach(a=>sc[a]=0); Q.forEach((q,i)=>sc[q.a]+=ans[i]||0);
+  radar(sc);
+  $('axlist').innerHTML=AXES.map(a=>`<div class="${sc[a]<=1?'weak':''}"><b>${sc[a]}</b>${a}</div>`).join('');
+  const weak=AXES.filter(a=>sc[a]<=1);
+  const head=`【私の店の診断結果】\nタイプ: ${t.name}(はい ${yes}/20)\n店舗数: ${PRE[0].o[pre[0]]} / スタッフ数: ${PRE[1].o[pre[1]]}\n一番の悩み: ${PRE[2].o[pre[2]]}\n弱いところ: ${weak.length?weak.join('・'):'特になし'}\nこの結果をふまえて、最初の質問から始めてください。\n\n`;
+  $('prompt').textContent=head+BASE;
+  sendResult({src:SRC,stores:PRE[0].o[pre[0]],staff:PRE[1].o[pre[1]],worry:PRE[2].o[pre[2]],type:t.name,yes,axes:AXES.map(a=>sc[a]),answers:ans.map(v=>v||0)});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+$('copy').onclick=()=>{
+  const txt=$('prompt').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{$('copied').textContent='コピーしました。AIのアプリを開いて貼り付けてください';})
+  .catch(()=>{const r=document.createRange();r.selectNodeContents($('prompt'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('copied').textContent='文章を選択しました。長押しでコピーしてください';});
+};
+$('start').onclick=()=>{$('intro').hidden=true;$('quiz').hidden=false;render();window.scrollTo({top:0});};
+$('back').onclick=()=>{if(step>0){step--;render();}};
+$('retry').onclick=()=>{SENT=false;step=0;pre.fill(null);ans.fill(null);$('result').hidden=true;$('intro').hidden=false;$('copied').textContent='';window.scrollTo({top:0});};
+</script>
+
+</body>
+</html>
