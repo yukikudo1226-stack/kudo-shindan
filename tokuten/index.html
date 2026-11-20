@@ -115,6 +115,16 @@ pre.prompt{white-space:pre-wrap;word-break:break-word;font-family:var(--gothic);
 .bangai{background:var(--soft);border-radius:6px;padding:20px 18px;display:flex;flex-direction:column;gap:10px}
 .bangai h3{font-family:var(--gothic);font-weight:700;font-size:20px;margin:0;line-height:1.5}
 .bangai p{margin:0;font-size:14px}
+.intro{border:1px solid var(--ink);padding:24px 18px;display:flex;flex-direction:column;gap:14px}
+.intro p{margin:0;font-size:15px;line-height:1.85}
+.intro .honne{font-weight:700;font-size:17px;line-height:1.6}
+.intro .thanks{font-size:14px;color:var(--sub)}
+.intro .gain{background:var(--soft);border-radius:6px;padding:14px 16px;font-size:15px}
+.intro .gain b,.cta .gain b{display:block}
+.anshin{list-style:none;margin:0;padding:0;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.anshin li::before{content:"・"}
+.cta .gain{background:var(--soft);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.cta ol{margin:0;padding-left:1.4em;font-size:15px}
 .cta{border:1px solid var(--ink);padding:26px 18px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:16px}
 .cta h2{font-family:var(--gothic);font-weight:700;font-size:26px;line-height:1.45;margin:0}
 .cta p{margin:0;font-size:15px}
@@ -142,6 +152,23 @@ pre.prompt{white-space:pre-wrap;word-break:break-word;font-family:var(--gothic);
 </header>
 
 <main class="wrap" style="margin-top:28px">
+  <section class="intro" aria-label="はじめに">
+    <p class="thanks">「オーナーが現場を離れる為の10大特典」を受け取っていただき、ありがとうございます。</p>
+    <p class="honne">先にひとつだけ、<br>正直な話をさせてください。</p>
+    <p>この特典は、僕が10年以上の現場で実際にやってきたことをまとめて、今も少しずつ更新しています。</p>
+    <p>でも、読んで終わる人がほとんどです。知るだけでは、なかなか実際の行動にはつながりません。</p>
+    <p>いちばんの近道は、あなたの店の話を一度聞かせてもらうことです。</p>
+    <p class="gain">無料相談(zoom・最大60分)では、<b>あなたの店の「最初の3ヶ月でやること」</b>を1枚にまとめます。<br>相談した方だけに、<b>「オーナーの分身AI」</b>もお送りします。</p>
+    <ul class="anshin">
+      <li>無理な勧誘はしません</li>
+      <li>2回目以降の方も相談できます</li>
+    </ul>
+    <p>公式LINEで<span class="kw">相談</span>と送ってください。</p>
+    <span class="waku">月5名まで</span>
+    <a class="btn" href="https://lin.ee/t2WPRNl" target="_blank" rel="noopener">公式LINEで相談する <span class="arw">→</span></a>
+    <a href="#soudan" class="note" style="text-align:center">相談の流れを見る ↓</a>
+  </section>
+
   <div class="stats">
     <div class="stat"><b>5</b><span>幹部育成</span></div>
     <div class="stat"><b>5</b><span>AI</span></div>
@@ -183,7 +210,7 @@ pre.prompt{white-space:pre-wrap;word-break:break-word;font-family:var(--gothic);
       <div class="push" id="push">
         <h3>「いいえ」が3つ以上あった方へ</h3>
         <p>それは、人や努力の問題ではなく、仕組みの「設計」の問題です。</p>
-        <p>無料相談(zoom・最大60分)で、どこから直すか・最初の一手は何かを一緒に整理します。</p>
+        <p>無料相談(zoom・最大60分)で、あなたの店の「最初の3ヶ月でやること」を一緒に決めます。相談した方だけに「オーナーの分身AI」もお送りします。</p>
         <a class="btn ghost" href="#soudan">無料相談について <span class="arw">→</span></a>
       </div>
       <p class="note" id="allYes" hidden>ほとんど「はい」でした。仕組みができている店ほど、特典で細かいズレが見つかります。気になるものから使ってみてください。</p>
@@ -730,17 +757,37 @@ OKが出たら、構成どおりに本文を書く。
   <section class="cta" id="soudan">
     <span class="eyebrow">Consultation</span>
     <h2>無料相談<br>(zoom・最大60分)</h2>
-    <p>10問チェックや特典を使って「うちはここが弱いかも」と思った方へ。</p>
-    <p>相談では、</p>
+    <p>読んで終わらせないために。</p>
+    <span class="jp-label">相談で一緒にやること</span>
     <ul>
-      <li>あなたの店のどこから直すか</li>
-      <li>最初の一手は何か</li>
-      <li>AIの仕組みを入れるなら何からか</li>
+      <li>今いちばん困っていることを聞きます</li>
+      <li>あなたの店で、どこから手をつけるかを診断します</li>
+      <li>「最初の3ヶ月でやること」を一緒に決めます</li>
     </ul>
-    <p>を一緒に整理します。相談のあとに、あなたの店の「個別診断メモ」をお渡しします。</p>
-    <p>公式LINEで<span class="kw">無料相談</span>または<span class="kw">相談</span>と送ってください。</p>
+    <div class="gain">
+      <span class="jp-label">持ち帰れるもの</span>
+      <b>あなたの店の「最初の3ヶ月でやること」(1枚)</b>
+      <span>月ごとに1つずつ、誰がいつまでにやるかまで入れた表です。</span>
+    </div>
+    <div class="gain">
+      <span class="jp-label">相談した方だけの特典</span>
+      <b>オーナーの分身AI</b>
+      <span>あなたの判断基準や任せる範囲を入れた、店長の相談相手になるAIです。店長が迷ったときに「オーナーならどう考えるか」を返します。</span>
+    </div>
+    <span class="jp-label">相談の流れ</span>
+    <ol>
+      <li>公式LINEで「相談」と送る</li>
+      <li>日程を決める</li>
+      <li>zoomで相談(最大60分)</li>
+      <li>後日、「最初の3ヶ月でやること」と「オーナーの分身AI」をお送りします</li>
+    </ol>
+    <ul class="anshin">
+      <li>無理な勧誘はしません</li>
+      <li>2回目以降の方も相談できます</li>
+      <li>いきなりzoomが不安な方は、LINEで今の悩みを一言送ってもらうだけでも大丈夫です</li>
+    </ul>
     <span class="waku">月5名まで</span>
-    <a class="btn" href="https://lin.ee/t2WPRNl" target="_blank" rel="noopener">公式LINEを開く <span class="arw">→</span></a>
+    <a class="btn" href="https://lin.ee/t2WPRNl" target="_blank" rel="noopener">公式LINEで相談する <span class="arw">→</span></a>
     <span class="url">https://lin.ee/t2WPRNl</span>
   </section>
 
