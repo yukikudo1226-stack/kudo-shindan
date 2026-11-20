@@ -38,6 +38,54 @@ a{color:inherit}
 .btn.ghost:hover{background:var(--ink);color:#fff}
 .btn:disabled{opacity:.35;cursor:not-allowed}
 
+/* 表紙(LP) */
+.fv{position:relative;overflow:hidden;margin-inline:-16px;padding:36px 0 0 16px;border-bottom:1px solid var(--ink)}
+.fv .halo{right:-150px;top:-140px}
+.fv-who{position:relative;margin:0 16px 14px 0;font-size:13px;font-weight:700;letter-spacing:.08em;display:flex;align-items:center;gap:10px}
+.fv-who::before{content:"";width:22px;height:1px;background:var(--ink)}
+.fv-grid{position:relative;display:grid;grid-template-columns:1fr 44%;align-items:end;max-width:576px;margin:0 auto}
+.fv-text{display:flex;flex-direction:column;gap:14px;padding-bottom:22px;position:relative;z-index:1}
+.fv h1{font-family:var(--gothic);font-weight:700;font-size:clamp(25px,7.6vw,42px);line-height:1.42;letter-spacing:.03em;margin:0;white-space:nowrap}
+.fv h1 .big{font-family:var(--latin);font-variant-numeric:lining-nums;font-weight:500;font-size:1.5em;line-height:1;letter-spacing:0;vertical-align:-.04em}
+.fv h1 .dot{text-emphasis:filled dot var(--ink);-webkit-text-emphasis:filled dot var(--ink);text-emphasis-position:over right}
+.fv-sub{margin:0;font-size:13px;line-height:1.75;color:var(--sub)}
+.fv-photo{align-self:stretch;display:flex;align-items:flex-end}
+.fv-photo img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 0}
+.fv-cred{margin:0 auto;max-width:560px;padding:14px 16px 16px 0;display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);position:relative;background:var(--ground)}
+.fv-cred b{font-size:15px;letter-spacing:.06em}
+.fv-cred span{font-size:12px;color:var(--sub)}
+.fv-btn{margin:0 16px 22px 0}
+.glist-head h2{font-family:var(--gothic);font-weight:700;font-size:24px;line-height:1.45;margin:6px 0 0}
+.glist-head p{margin:6px 0 0;font-size:13px;color:var(--sub)}
+.glist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.glist a{display:flex;flex-direction:column;gap:4px;height:100%;border:1px solid var(--line);border-radius:6px;padding:10px 12px 12px;text-decoration:none;font-size:13px;font-weight:700;line-height:1.55;transition:border-color .2s}
+.glist a:hover{border-color:var(--ink)}
+.glist i{font-family:var(--latin);font-variant-numeric:lining-nums;font-style:normal;font-weight:500;font-size:24px;line-height:1}
+.glist .sec{grid-column:1/-1}
+.glist .sec a{background:var(--soft);border-color:var(--ink);flex-direction:row;align-items:center;gap:12px}
+.glist small{display:block;font-size:10px;letter-spacing:.2em;color:var(--sub);font-weight:400}
+/* 最後の特典(鍵) */
+.lock{border:1px solid var(--ink);padding:26px 18px 22px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.lock .honne{margin:0;font-weight:700;font-size:17px;line-height:1.6}
+.lock p{margin:0;font-size:15px;line-height:1.85}
+.lbox{border:1px dashed var(--ink);border-radius:6px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;background:var(--soft);transition:background .5s,border-color .5s}
+.lbox .lbl{font-size:11px;letter-spacing:.24em;color:var(--sub)}
+.lbox .ttl{font-weight:700;font-size:20px;line-height:1.5;filter:blur(7px);user-select:none;transition:filter .9s ease}
+.lic{width:44px;height:52px;color:var(--ink)}
+.lic .sh{transition:transform .6s cubic-bezier(.3,1.6,.5,1);transform-origin:50% 100%}
+.lock.open .lic .sh{transform:translateY(-7px) rotate(-18deg) translateX(-2px)}
+.lock.open .lbox{background:var(--ground);border-style:solid}
+.lock.open .lbox .ttl{filter:none;user-select:auto}
+.unlock{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:999px;padding:16px 22px;font-weight:700;font-size:16px;letter-spacing:.1em;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;animation:nudge 2.4s ease-in-out infinite}
+@keyframes nudge{0%,80%,100%{transform:none}86%{transform:rotate(-1.5deg)}92%{transform:rotate(1.5deg)}}
+.lock.open .unlock{display:none}
+.reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .7s ease,opacity .7s ease .15s}
+.reveal>div{overflow:hidden;display:flex;flex-direction:column;gap:14px}
+.lock.open .reveal{grid-template-rows:1fr;opacity:1}
+.reveal h3{font-family:var(--gothic);font-weight:700;font-size:21px;line-height:1.5;margin:4px 0 0}
+.reveal .gain{background:var(--soft);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.reveal .gain b{font-size:15px}
+
 /* 表紙 */
 .hero{position:relative;overflow:hidden;margin-inline:-16px;padding:44px 16px 8px}
 .halo{position:absolute;right:-120px;top:-110px;width:380px;height:380px;pointer-events:none;color:var(--mid)}
@@ -142,39 +190,82 @@ pre.prompt{white-space:pre-wrap;word-break:break-word;font-family:var(--gothic);
     <circle cx="190" cy="190" r="186"/><circle cx="190" cy="190" r="150" opacity=".8"/><circle cx="190" cy="190" r="114" opacity=".6"/><circle cx="190" cy="190" r="78" opacity=".45"/><circle cx="190" cy="190" r="42" opacity=".3"/></g></symbol>
 </svg>
 
-<header class="hero">
+<header class="fv">
   <svg class="halo" aria-hidden="true"><use href="#halo"/></svg>
-  <div class="hero-in">
-    <span class="eyebrow">Kudo Method — Gifts</span>
-    <h1>オーナーが<br><span class="dot">現場</span>を離れる<br>為の10大特典</h1>
-    <p class="lead">美容師以外の仕事はAIに。浮いた時間で、任せられる幹部を育てる。<br>11億規模の美容組織で、育成・離職・集客の実務をしてきた僕が、現場で使ってきた考え方と道具をまとめました。</p>
+  <p class="fv-who">店舗が増えて、現場を離れられないオーナーへ</p>
+  <div class="fv-grid">
+    <div class="fv-text">
+      <h1>オーナーが<br><span class="dot">現場</span>を離れる<br>為の<span class="big">10</span>大特典</h1>
+      <p class="fv-sub">美容師以外の仕事はAIに。<br>浮いた時間で、<br>任せられる幹部を育てる。</p>
+    </div>
+    <div class="fv-photo"><img src="kudo.jpg" width="600" height="800" alt="工藤ユウキ"></div>
+  </div>
+  <div class="fv-cred">
+    <b>美容室の設計マネージャー 工藤ユウキ</b>
+    <span>11億規模の美容組織での実務経験</span>
   </div>
 </header>
 
 <main class="wrap" style="margin-top:28px">
-  <section class="intro" aria-label="はじめに">
-    <p class="thanks">「オーナーが現場を離れる為の10大特典」を受け取っていただき、ありがとうございます。</p>
-    <p class="honne">先にひとつだけ、<br>正直な話をさせてください。</p>
-    <p>この特典は、僕が10年以上の現場で実際にやってきたことをまとめて、今も少しずつ更新しています。</p>
-    <p>でも、読んで終わる人がほとんどです。知るだけでは、なかなか実際の行動にはつながりません。</p>
-    <p>いちばんの近道は、あなたの店の話を一度聞かせてもらうことです。</p>
-    <p class="gain">無料相談(zoom・最大60分)では、<b>あなたの店の「最初の3ヶ月でやること」</b>を1枚にまとめます。<br>相談した方だけに、<b>「オーナーの分身AI」</b>もお送りします。</p>
-    <ul class="anshin">
-      <li>無理な勧誘はしません</li>
-      <li>2回目以降の方も相談できます</li>
+  <a class="btn fv-btn" href="#list" style="margin:0">特典を見る <span class="arw">↓</span></a>
+
+  <!-- 一覧 -->
+  <section id="list" class="wrap" style="gap:16px;scroll-margin-top:16px">
+    <div class="glist-head">
+      <span class="eyebrow">Gift List</span>
+      <h2>受け取れる10の特典</h2>
+      <p>受け取っていただき、ありがとうございます。押すと、その特典の場所へ飛びます。</p>
+    </div>
+    <ul class="glist">
+<li><a href="#g1"><i>01</i><span>工藤式マネジメントAI(5分診断つき)</span></a></li>
+<li><a href="#g2"><i>02</i><span>任せられる幹部が育つチェックリスト20項目</span></a></li>
+<li><a href="#g3"><i>03</i><span>オーナーが手放す仕事リスト</span></a></li>
+<li><a href="#g4"><i>04</i><span>幹部育成カリキュラムのひな形</span></a></li>
+<li><a href="#g5"><i>05</i><span>マネジメント失敗5選</span></a></li>
+<li><a href="#g6"><i>06</i><span>インスタの投稿文が作れるAI</span></a></li>
+<li><a href="#g7"><i>07</i><span>ホットペッパーのデータから改善点が分かるAI</span></a></li>
+<li><a href="#g8"><i>08</i><span>Google口コミの返信文AI + 口コミが増える仕組み</span></a></li>
+<li><a href="#g9"><i>09</i><span>ブログが書けるAI</span></a></li>
+<li><a href="#g10"><i>10</i><span>数字分析AI</span></a></li>
+<li class="sec"><a href="#gsecret"><i>＋</i><span><small>シークレット</small>シフト作成が5分でできるAI</span></a></li>
     </ul>
-    <p>公式LINEで<span class="kw">相談</span>と送ってください。</p>
-    <a class="btn" href="https://lin.ee/t2WPRNl" target="_blank" rel="noopener">公式LINEで相談する <span class="arw">→</span></a>
-    <a href="#soudan" class="note" style="text-align:center">相談の流れを見る ↓</a>
   </section>
 
-  <div class="stats">
-    <div class="stat"><b>5</b><span>幹部育成</span></div>
-    <div class="stat"><b>5</b><span>AI</span></div>
-    <div class="stat"><b>+1</b><span>シークレット</span></div>
-  </div>
-  <a class="btn" href="#check">まず1分の10問チェック <span class="arw">→</span></a>
-  <span class="sign">美容室の設計マネージャー 工藤ユウキ</span>
+  <!-- 最後の特典(鍵) -->
+  <section class="lock" id="lock" aria-label="最後の特典">
+    <p class="honne">先にひとつだけ、<br>正直な話をさせてください。</p>
+    <p>この特典は、読んで終わる人がほとんどです。知るだけでは、なかなか実際の行動にはつながりません。</p>
+    <p>だから、もうひとつ特典を用意しました。</p>
+    <div class="lbox">
+      <svg class="lic" viewBox="0 0 44 52" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path class="sh" d="M12 22V15a10 10 0 0 1 20 0v7"/><rect x="5" y="22" width="34" height="26" rx="4" fill="var(--ground)"/><path d="M22 32v6"/></g></svg>
+      <span class="lbl">最後の特典</span>
+      <span class="ttl" id="lockTtl">オーナーの分身AI</span>
+    </div>
+    <button type="button" class="unlock" id="unlock" aria-controls="reveal" aria-expanded="false">最後の特典を開ける</button>
+    <div class="reveal" id="reveal">
+      <div>
+        <h3>最後の特典は、<br>あなたの店専用に作ります</h3>
+        <p>10大特典は、どの店でも使える「型」です。最後の特典「オーナーの分身AI」は、無料相談(zoom・最大60分)であなたの店の話を聞いてから作ります。</p>
+        <div class="gain">
+          <b>どんなAI?</b>
+          <span>あなたの判断基準や任せる範囲を入れた、店長の相談相手になるAIです。店長が迷ったときに「オーナーならどう考えるか」を返します。</span>
+        </div>
+        <div class="gain">
+          <b>あなたの店の「最初の3ヶ月でやること」(1枚)</b>
+          <span>相談の中で一緒に決めて、お送りします。</span>
+        </div>
+        <ul class="anshin">
+          <li>無理な勧誘はしません</li>
+          <li>2回目以降の方も相談できます</li>
+        </ul>
+        <p>公式LINEで<span class="kw">相談</span>と送ってください。</p>
+        <a class="btn" href="https://lin.ee/t2WPRNl" target="_blank" rel="noopener">公式LINEで相談する <span class="arw">→</span></a>
+        <a href="#soudan" class="note" style="text-align:center">相談の流れを見る ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <a class="btn ghost" href="#check">まず1分の10問チェック <span class="arw">→</span></a>
 
   <!-- 10問チェック -->
   <section id="check" class="wrap" style="gap:18px">
@@ -769,7 +860,7 @@ OKが出たら、構成どおりに本文を書く。
       <span>月ごとに1つずつ、誰がいつまでにやるかまで入れた表です。</span>
     </div>
     <div class="gain">
-      <span class="jp-label">相談した方だけの特典</span>
+      <span class="jp-label">最後の特典(相談した方だけ)</span>
       <b>オーナーの分身AI</b>
       <span>あなたの判断基準や任せる範囲を入れた、店長の相談相手になるAIです。店長が迷ったときに「オーナーならどう考えるか」を返します。</span>
     </div>
@@ -826,6 +917,11 @@ showBtn.addEventListener('click',()=>{
   document.getElementById('allYes').hidden=no>=3;
   const r=document.getElementById('result');r.hidden=false;r.scrollIntoView({block:'start'});
 });
+(function(){
+  const lk=document.getElementById('lock'),b=document.getElementById('unlock');
+  if(!lk||!b)return;
+  b.addEventListener('click',()=>{lk.classList.add('open');b.setAttribute('aria-expanded','true');});
+})();
 function copyText(t){
   if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t);
   return new Promise((ok,ng)=>{const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){ng(e);}document.body.removeChild(ta);});
